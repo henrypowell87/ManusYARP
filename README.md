@@ -1,5 +1,5 @@
 # Manus-VR_record
-This is a basic program that reads data from the MANUS-VR gloves' finger sensors to a CSV file.
+This is a basic program that reads data from the MANUS-VR gloves' finger sensors to a CSV file using YARP. 
 
 
 # Dependency
