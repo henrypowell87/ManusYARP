@@ -16,9 +16,9 @@ bool manusYarpModule::configure(yarp::os::ResourceFinder &rf) {
     /* Process all parameters from both command-line and .ini file */
 
     /* get the module name which will form the stem of all module port names */
-    moduleName            = rf.check("name",
-                                     Value("/ManusYARP"),
-                                     "module name (string)").asString();
+    moduleName = rf.check("name",
+                          Value("/ManusYARP"),
+                          "module name (string)").asString();
     /*
     * before continuing, set the module name before getting any other parameters,
     * specifically the port names which are dependent on the module name
@@ -29,22 +29,22 @@ bool manusYarpModule::configure(yarp::os::ResourceFinder &rf) {
     * get the robot name which will form the stem of the robot ports names
     * and append the specific part and device required
     */
-    robotName             = rf.check("robot",
-                                     Value("icub"),
-                                     "Robot name (string)").asString();
+    robotName = rf.check("robot",
+                         Value("icub"),
+                         "Robot name (string)").asString();
 
-    robotPortName         = "/" + robotName + "/head";
+    robotPortName = "/" + robotName + "/head";
 
-    inputPortName           = rf.check("inputPortName",
-                                       Value(":i"),
-                                       "Input port name (string)").asString();
+    inputPortName = rf.check("inputPortName",
+                             Value(":i"),
+                             "Input port name (string)").asString();
 
 
     /*
     * attach a port of the same name as the module (prefixed with a /) to the module
     * so that messages received from the port are redirected to the respond method
     */
-    handlerPortName =  "";
+    handlerPortName = "";
     handlerPortName += getName();         // use getName() rather than a literal
 
     if (!handlerPort.open(handlerPortName.c_str())) {
@@ -53,44 +53,31 @@ bool manusYarpModule::configure(yarp::os::ResourceFinder &rf) {
     }
 
     attach(handlerPort);                  // attach to port
-    if (rf.check("config")) {
-        configFile=rf.findFile(rf.find("config").asString().c_str());
-        if (configFile=="") {
-            return false;
-        }
-    }
-    else {
-        configFile.clear();
-    }
 
 
-    recordHandType = rf.check("hand_to_read",
-                                                   Value("both"),
-                                                   "type of recording (string)").asString();
+    const std::string recordHandType = rf.check("hand_to_read",
+                                                Value("both"),
+                                                "type of recording (string)").asString();
 
 
-    std::string sampleRate = rf.check("sample_rate",
-                                                Value(1000),
-                                                "sample rate in Hz (int)").asString();
+    const int sampleRate = rf.check("sample_rate",
+                                      Value(1000),
+                                      "sample rate in Hz (int)").asInt();
 
-    fileName = rf.check("file_name",
-                                              Value("toto.csv"),
-                                              "file name of outputted .csv file").asString();
+    const std::string fileName = rf.check("file_name",
+                        Value("record_manus.csv"),
+                        "file name of outputted .csv file").asString();
 
     /* create the thread and pass pointers to the module parameters */
 
-    rThread = new manusYarpRatethread();
-    rThread->setRecordHandType(recordHandType);
-    rThread->setfileName(fileName);
-//    rThread->setsampleRate();
+    rThread = new manusYarpRatethread(recordHandType, sampleRate);
+    rThread->setFileName(fileName);
     rThread->setName(getName().c_str());
-
-//    rThread->setInputPortName(inputPortName.c_str());
 
     /* now start the thread to do the work */
     rThread->start(); // this calls threadInit() and it if returns true, it then calls run()
 
-    return true ;       // let the RFModule know everything went well
+    return true;       // let the RFModule know everything went well
     // so that it will then run the module
 }
 
@@ -107,19 +94,17 @@ bool manusYarpModule::close() {
     return true;
 }
 
-bool manusYarpModule::respond(const Bottle& command, Bottle& reply)
-{
-    string helpMessage =  string(getName().c_str()) +
-                          " commands are: \n" +
-                          "help \n" +
-                          "quit \n";
+bool manusYarpModule::respond(const Bottle &command, Bottle &reply) {
+    string helpMessage = string(getName().c_str()) +
+                         " commands are: \n" +
+                         "help \n" +
+                         "quit \n";
     reply.clear();
 
-    if (command.get(0).asString()=="quit") {
+    if (command.get(0).asString() == "quit") {
         reply.addString("quitting");
         return false;
-    }
-    else if (command.get(0).asString()=="help") {
+    } else if (command.get(0).asString() == "help") {
         cout << helpMessage;
         reply.addString("ok");
     }
@@ -128,13 +113,11 @@ bool manusYarpModule::respond(const Bottle& command, Bottle& reply)
 }
 
 /* Called periodically every getPeriod() seconds */
-bool manusYarpModule::updateModule()
-{
+bool manusYarpModule::updateModule() {
     return true;
 }
 
-double manusYarpModule::getPeriod()
-{
+double manusYarpModule::getPeriod() {
     /* module periodicity (seconds), called implicitly by myModule */
     return 1;
 }
