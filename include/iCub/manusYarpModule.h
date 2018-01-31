@@ -46,10 +46,6 @@ class manusYarpModule:public yarp::os::RFModule {
     std::string inputPortName;               // name of the input port for events
     std::string outputPortName;              // name of output port
     std::string handlerPortName;             // name of handler port
-    std::string configFile;                  // name of the configFile that the resource Finder will seek
-    std::string recordHandType;              // name of hand to be recorded from
-    std::string fileName;                    // name of .csv file
-    int sampleRate;                          // sampling rate of gloves
 
     yarp::os::Port handlerPort;              // a port to handle messages
     /*  */
