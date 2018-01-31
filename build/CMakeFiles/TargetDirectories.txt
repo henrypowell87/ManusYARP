@@ -1,7 +1,0 @@
-/home/henry/Desktop/ManusYARP/build/CMakeFiles/install.dir
-/home/henry/Desktop/ManusYARP/build/CMakeFiles/list_install_components.dir
-/home/henry/Desktop/ManusYARP/build/CMakeFiles/rebuild_cache.dir
-/home/henry/Desktop/ManusYARP/build/CMakeFiles/MANUSYARP.dir
-/home/henry/Desktop/ManusYARP/build/CMakeFiles/install/strip.dir
-/home/henry/Desktop/ManusYARP/build/CMakeFiles/install/local.dir
-/home/henry/Desktop/ManusYARP/build/CMakeFiles/edit_cache.dir
