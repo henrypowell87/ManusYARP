@@ -21,7 +21,7 @@ For right hand only:
 thumbLowR,thumbHighR,indexLowR,indexHighR,middleLowR,middleHighR,ringLowR,ringHighR,pinkyLowR,pinkyHighR
 
 
-# Module parameters:
+# Module Parameters:
 
 Module parameters are called in the command line (assuming that a YARP server is already running) in the following way:
 
