@@ -9,7 +9,7 @@ A YARP module thar reads from and outputs finger sensor data from the Manus-VR g
 The header file and library for both should be installed on your computer (/usr/local)
 
 # CSV Format
-The format of the CSV File is as follow :
+The format of the CSV file is as follow :
 
 For both hands [finger/sensor/hand]:
 thumbLowR,thumbHighR,indexLowR,indexHighR,middleLowR,middleHighR,ringLowR,ringHighR,pinkyLowR,pinkyHighR,thumbLowL,thumbHighL,indexLowL,indexHighL,middleLowL,middleHighL,ringLowL,ringHighL,pinkyLowL,pinkyHighL
