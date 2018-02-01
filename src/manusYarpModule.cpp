@@ -60,13 +60,14 @@ bool manusYarpModule::configure(yarp::os::ResourceFinder &rf) {
                                                 "type of recording (string)").asString();
 
 
-    const int sampleRate = rf.check("sample_rate",
-                                      Value(1000),
-                                      "sample rate in Hz (int)").asInt();
+    const int sampleRate = 1000 / rf.check("sample_rate",
+                                                                   Value(1000),
+                                                                   "sample rate in Hz (int)").asInt();
 
     const std::string fileName = rf.check("file_name",
-                        Value("record_manus.csv"),
+                        Value("record_manus"), //.csv
                         "file name of outputted .csv file").asString();
+
 
     /* create the thread and pass pointers to the module parameters */
 

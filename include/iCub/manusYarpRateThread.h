@@ -45,7 +45,7 @@ private:
     std::string configFile;         // name of the configFile where the parameter of the camera are set
     std::string inputPortName;      // name of input port for incoming events, typically from aexGrabber
     std::string recordHandType;     // record type : left, right, both
-    int sampleRate;                 // sample rate of recording in Hz: 100Hz, 500Hz, 1000Hz
+    __useconds_t sampleRate;                 // sample rate of recording in Hz: 100Hz, 500Hz, 1000Hz
     std::string fileNameCSV;           // Defining the saving file
 
     std::ofstream recordSensorCSV;
@@ -65,11 +65,11 @@ private:
 
 public:
    /**
-    * Constructor with hand_profiule_recording and samplerate
+    * Constructor with hand_profile_recording and samplerate
     * @param t_recordHandType
     * @param t_samplerate
     */
-    manusYarpRatethread(const std::string t_recordHandType, const int t_samplerate);
+    manusYarpRatethread(std::string t_recordHandType, int t_samplerate);
 
     /**
     * constructor default
