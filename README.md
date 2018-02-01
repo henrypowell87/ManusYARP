@@ -2,7 +2,7 @@
 A YARP module thar reads from and outputs finger sensor data from the Manus-VR gloves (https://manus-vr.com/) 
 
 
-# Dependency
+# Dependencies
 - YARP
 - MANUS-VR SDK
 
@@ -21,7 +21,7 @@ For right hand only:
 thumbLowR,thumbHighR,indexLowR,indexHighR,middleLowR,middleHighR,ringLowR,ringHighR,pinkyLowR,pinkyHighR
 
 
-# Module Parameters:
+# Module Parameters
 
 Module parameters are called in the command line (assuming that a YARP server is already running) in the following way:
 
